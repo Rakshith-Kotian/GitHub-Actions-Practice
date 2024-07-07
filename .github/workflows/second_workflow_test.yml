@@ -32,4 +32,3 @@ jobs:
 
 # this workflow will run after each push to the repo ( as its configured for each push) --> first job
 # the second job will build the code
-
