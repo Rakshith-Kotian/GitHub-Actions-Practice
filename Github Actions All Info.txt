@@ -167,7 +167,7 @@ we can configure push details to specific branches / specific person etc , or PR
 **************************************
 Github Actions Experessions or Context:
 Github actions will store or provide some metadata while running jobs , we can access them using context and print them using expressions
-Eg: "github" is a context --> The github context contains information about the workflow run and the event that triggered the run. --> https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
+Eg: "github" is a context --> The github context contains information about the workflow run and the event that triggered the run. --> https://docs.github.com/en/actions/learn-github-actions/contexts#github-context  --> this will display repo owner, id, URL etc..
 https://docs.github.com/en/actions/learn-github-actions/contexts
 https://docs.github.com/en/actions/learn-github-actions/expressions
 
