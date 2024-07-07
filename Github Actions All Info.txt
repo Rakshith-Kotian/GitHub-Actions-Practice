@@ -74,7 +74,7 @@ every job can have multiple steps with specified name, and steps will have speci
 Example of Simple Workflow created:
 
 name: First Workflow  										-- define workflow name
-on: workflow_dispatch  										-- conditon to run workflow ( with event specified )
+on: workflow_dispatch  										-- conditon to run workflow ( with event specified ) ( workflow_dispatch will add a button on Git UI to trigger a workflow manually)
 jobs:                  										-- define jobs config
   first_job:           										-- first job name to be executed
     runs-on: ubuntu-latest    								-- define runner name
@@ -137,3 +137,27 @@ Note: ( this issue might come if others using someone elses repo , they need to 
 **************************************
 
 Job Failure Analysis:
+Similar to Termial --> github actions workflow will display all failure steps , just open every jobs and steps and check reason for failure
+
+**************************************
+More about jobs (Series & Parallel run)
+^ every job have its own runner and same workflow jobs can have different runners
+^ build code means building the code , i.e code is transferred to mobile app , or website etc
+^ Note: By default jobs in same workflow runs in parallel
+^ To run job in series "needs" keyword is used , 
+Eg:
+deploy:                          
+    needs: test   --> deploy job will run only if test job is passed..
+	
+to wait for multiple jobs to finish give needs: [test,job2,job3]  etc.. 
+	
+Development: Code is written, bugs are fixed, and new features are added.
+Build: The code is compiled and ready for testing or deployment.
+Test: A team of testers use a testing environment to ensure the system works correctly and meets all requirements.
+Deploy: The release version of the code is deployed to a production environment where end users can access the application. 
+
+**************************************
+
+Multiple Triggers/events :
+Eg: we can run a workflow for different kind of events , eg: for each push , each PR , manual run etc ....
+for that:  just give     on: [push, workflow_dispatch, any other event...] in a array format

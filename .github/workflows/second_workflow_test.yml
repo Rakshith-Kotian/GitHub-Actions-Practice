@@ -1,5 +1,5 @@
 name: Test Workflow
-on: push                          # this test code containing workflow will be triggered after each push to the repository
+on: [push, workflow_dispatch]                         # this test code containing workflow will be triggered after each push to the repository
 jobs:
   test:
     runs-on: ubuntu-latest
