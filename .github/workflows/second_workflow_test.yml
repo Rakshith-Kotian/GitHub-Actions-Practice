@@ -12,7 +12,24 @@ jobs:
           node-version: 21
       - name: Install Dependencies
         run: npm ci                # command to install project defined dependencies ( in this repo react is dependency) ( even though if react is not installed in local system , it will be installed in runner/ github server)
-      - name: Run Tests
+      - name: Run tests
         run: npm test              # command as defined in package.json file
+  deploy:                          # second job to build the code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4 
+      - name: Install Node JS     
+        uses: actions/setup-node@v4 
+        with:
+          node-version: 21
+      - name: Install Dependencies
+        run: npm ci               )
+      - name: Build project
+        run: npm run build        # this command is part of package.json
+      - name: Deploy
+        run: echo "Deploying...."
 
-# this workflow will run after each push to the repo ( as its configured for each push)
+# this workflow will run after each push to the repo ( as its configured for each push) --> first job
+# the second job will build the code
+
