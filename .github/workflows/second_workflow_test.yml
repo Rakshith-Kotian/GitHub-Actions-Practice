@@ -9,8 +9,10 @@ jobs:
       - name: Install Node JS     # since ubuntu latest runner already has default node js i dont need this step , but still using just for practice by providing some node version
         uses: actions/setup-node@v4 # using setup-node action to install '18' th version of node in runner ( if runner version of node is outdated then this is usefull)
         with:
-          node-version: 18
+          node-version: 20
       - name: Install Dependencies
         run: npm ci                # command to install project defined dependencies ( in this repo react is dependency) ( even though if react is not installed in local system , it will be installed in runner/ github server)
       - name: Run Tests
         run: npm test              # command as defined in package.json file
+
+# this workflow will run after each push to the repo ( as its configured for each push)
