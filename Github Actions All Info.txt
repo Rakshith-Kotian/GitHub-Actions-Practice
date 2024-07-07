@@ -1,0 +1,103 @@
+Git:
+Free Version controll system installed to system, branches, fork, commmits, merge, rollback, sync fork etc
+
+Github:
+Tool which uses git, repository, push&pull, clone, access management, issues, pull requests etc
+
+( After installing Git, you can also configure it - most importantly, you can set a username and email address that will be connected to all your code snapshots.
+This can be done via:
+git config --global user.name "your-username"
+git config --global user.email "your-email"
+You can learn more about Git's configuration options here: https://git-scm.com/docs/git-config )
+
+Github Actions:
+https://docs.github.com/en/actions - learn every details here
+Repository workflow automation service ( CI/CD Pipeline )
+
+Uses of Github Actions:
+Continuos Integration --> build code changes , test & merge automatically
+Continuous Delivery/Deployment --> publish new version automatically
+Automatic code review
+Issue management etc
+
+Learn Github Commands all:
+staging, rollback,commit, reset, stage, push, branch, merge etc....
+
+Pricing:
+Public Repo - free
+Private repo - some costs involved
+
+-----------------------------------------------------------------------------------------------------------------
+
+Course Content:
+
+Key Elements of Github Actions:
+* Workflows 
+* Jobs
+* Steps
+
+A Repositopry can have multiple workflows and each workflow can have multiple jobs and each jobs have several steps ( Eg: Teamcity --> a workflow can run one job after another completed --> download, encryt & decrypt files etc..)
+
+Workflow - can be manually triggered / we can have some conditions/ triggers ( call it as events )defined to run a workflow automatically
+Jobs - jobs will have runners / agents we can say ( from github server) to run jobs , we can add condition for jobs too
+Steps - steps can be a command to run code or any action , steps run in series and also can be conditional
+
+Eg: workflow - download files ( manual or auto trigger , we might need to give some properties )
+    Job      - 1) download file from server/S3 2) decrypt those files
+	Steps    -  the above two jobs have respective steps attached to them
+	
+	
+**************************************	
+Github Dummy login for Practice: 
+Goto created public repo with name under my Github Profile--> GitHub-Actions-Practice
+
+**************************************
+
+Creating a Simple Workflow just to readme file:
+
+1) Goto my GitHub repository ( here public repo "GitHub-Actions-Practice" )
+2) Click "Actions" tab
+3) Click on "Simple Workflow" template and click "Configure"
+4) Give a name to creating workflow ( it will ve saved under Repo/.github/workflows/workflow_name.yml path) ( workflow will be a .yml file - yml is a simple formated text file) ( also we can do this locally and push this to repository to its proper path)
+5) now delete existing configaration lines and create my own config as required
+
+configuring workflow (.yml) file:
+name: name of the workflow ( can be anything user defined)
+on: conditon when workflow to be executed ( should contain github issues event names eg: workflow_dispatch )( github events will be learned in later sections of this course )
+jobs: will have list of jobs to run(with GitHub runner & steps ( name & run )name to be specified )( make sure jobs configaration is properly given with 1 tab indentation in .yml file ) ( runner is nothis but specifing server to run a job, GitHub runners: https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners )
+
+now job need to be defined with steps 
+every job can have multiple steps with specified name, and steps will have specific actions/ command to perform or run 
+
+Example of Simple Workflow created:
+
+name: First Workflow  										-- define workflow name
+on: workflow_dispatch  										-- conditon to run workflow ( with event specified )
+jobs:                  										-- define jobs config
+  first_job:           										-- first job name to be executed
+    runs-on: ubuntu-latest    								-- define runner name
+    steps:                    								-- steps list for a job
+      - name: print greeting  								-- define first step name
+        run: echo "Hello, I'm Learning GitHub Actions"  	-- first step run command ( action )
+      - name: print goodbye   								-- define second step name
+        run: echo "Good Bye!" 								-- second step run command ( action )
+		
+6) now commit the configaration to repo ( if done locally it will be committed through pull requests )
+7) now goto actions tab again and open my created workflow
+8) click on run workflow & now reload action tab it will show workflow run details , job details, step details, console statements, whether its pass or failed etc.. ( all can be viewed step by step )
+9) since we gave event as workflow_dispatch we need to trigger workflow manually in github actions tab..
+
+Note: (
+Running Multi-Line Shell Commands
+Thus far, you learned how to run simple shell commands like echo "Something" via run: echo "Something".
+
+If you need to run multiple shell commands (or multi-line commands, e.g., for readability), you can easily do so by adding the pipe symbol (|) as a value after the run: key.
+
+Like this:
+...
+run: |
+    echo "First output"
+    echo "Second output"
+This will run both commands in one step. )
+
+**************************************
