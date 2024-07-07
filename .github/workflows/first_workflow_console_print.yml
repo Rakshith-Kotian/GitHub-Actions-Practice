@@ -1,4 +1,4 @@
-name: First Workflow
+name: Print Workflow
 on: workflow_dispatch
 jobs:
   first_job:
@@ -8,3 +8,4 @@ jobs:
         run: echo "Hello, I'm Learning GitHub Actions"
       - name: print goodbye
         run: echo "Good Bye!"
+# run is used to run a simple shell command in server (runner)

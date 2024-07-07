@@ -101,3 +101,22 @@ run: |
 This will run both commands in one step. )
 
 **************************************
+
+Github Events: ( workflow can be triggered based on these triggered events ) ( check all event & its sub config in github actions documentation )
+More Info: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+
+Example: 
+github repo can detect push, pull , fork , create , issues, watch etc 
+other non repo events  workflow_dispatch ( to trigger workflow manually) , repository_dispatch( trigger workflow using rest api) , schedule ( schedule workflow ), workflow_call ( called by another workflow ) etc..
+Note : each event also have sub events eg : pull request has pull request opened, closed, edited etc based on that workflow can be triggered  https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request
+
+Note: Jobs will run on github provided server using code from repository ( it wont run in github repository itself , repo is just folders in github database) ( so we need provide code to server for any run purpose )
+this will be done using "Actions" -- > jobs will make use of "Actions" in steps to run the workflow after getting all dependencies/code etc//
+
+Github Actions:
+run --> is similar action used to run shell commands in github server 
+Action is a custom application that performs complex or repeated tasks ( we can create own custom actions ) ( else we can use actions created by other  to our workflow)
+
+Eg for action:
+checkout action : https://github.com/actions/checkout -- this action is used to checkout any github repo , this action is official and maintained by github team
+Offical marketplace for actions : https://github.com/marketplace/actions/checkout (https://github.com/marketplace)
