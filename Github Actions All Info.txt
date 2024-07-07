@@ -1,3 +1,5 @@
+Learn : config file changes and then running script , env valriable setup and then run script ...
+
 Git:
 Free Version controll system installed to system, branches, fork, commmits, merge, rollback, sync fork etc
 
@@ -115,8 +117,15 @@ this will be done using "Actions" -- > jobs will make use of "Actions" in steps 
 
 Github Actions:
 run --> is similar action used to run shell commands in github server 
-Action is a custom application that performs complex or repeated tasks ( we can create own custom actions ) ( else we can use actions created by other  to our workflow)
+Action is a custom application that performs complex or repeated tasks ( we can create own custom actions ) ( else we can use actions created by other  to our workflow) ( action cretaed by others will a also a repo containing codes )
 
 Eg for action:
 checkout action : https://github.com/actions/checkout -- this action is used to checkout any github repo , this action is official and maintained by github team
 Offical marketplace for actions : https://github.com/marketplace/actions/checkout (https://github.com/marketplace)
+The actions uses "uses" key and value we can get using that specific actions website
+eg: checkout action is defined as uses: actions/checkout@v3   --> this value i got from official website https://github.com/actions/checkout  ( make sure to give a specfific version so if actions updated in future exiting workflow wont be broken )
+also we can further configure actions using "with" keyword --> refer https://github.com/actions/checkout 
+
+Github runners will have most of dependencies like node js by itself , to check which runner has which dependency refer --> https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#using-preinstalled-software & https://github.com/actions/runner-images & https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2404-Readme.md  check what and all installed in runner here
+since ubuntu latest already has nodejs ,(i dont need to add node js installation step using any other actions)
+Note: if runner dont have node js , then add a step of installing node js and then use "actions/setup-node" to install node js in selected runner:  https://github.com/actions/setup-node  (refer instructions in that official doc)
