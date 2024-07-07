@@ -129,3 +129,11 @@ also we can further configure actions using "with" keyword --> refer https://git
 Github runners will have most of dependencies like node js by itself , to check which runner has which dependency refer --> https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#using-preinstalled-software & https://github.com/actions/runner-images & https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2404-Readme.md  check what and all installed in runner here
 since ubuntu latest already has nodejs ,(i dont need to add node js installation step using any other actions)
 Note: if runner dont have node js , then add a step of installing node js and then use "actions/setup-node" to install node js in selected runner:  https://github.com/actions/setup-node  (refer instructions in that official doc)
+
+Note: if runner has lower version of node installed , then i can use setup-node action to installed higher version of node in runner to run my workflow ( usefull when code is developed using latest version and runner has outdated version )
+
+Note: ( this issue might come if others using someone elses repo , they need to have a personal access token to trigger a workflow ) make sure user workflow access --> sometimes if repo doesnt have workflow creation access then goto --> github settings --> developer setting --> goto personal access token --> generate new token --> selct both repo and workflow --> click generate token  ( now delete current token and add new generated token using youtube )
+
+**************************************
+
+Job Failure Analysis:
