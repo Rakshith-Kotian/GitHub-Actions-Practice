@@ -1,0 +1,8 @@
+name: Output event Details if any issues created on Repository
+on: issues
+jobs:
+  issuesinfo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output github Context
+        run: echo "${{toJSON(github)}}"
