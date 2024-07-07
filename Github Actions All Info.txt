@@ -174,3 +174,7 @@ https://docs.github.com/en/actions/learn-github-actions/expressions
 This will be usefull if we are perfroming actions on other repository from our repo etc , i.e: if we dont use checkout action and manually clone our repo to server and use that code, than we can see github repo logs , name etc ..
 
 **************************************
+
+Note: since build, test, deploy is done in series , we can create 3 different jobs for it or we can make as 3 steps in a single job , because if one step fails next steps wont run ( but for clarity  making different jobs is best )
+
+**************************************
