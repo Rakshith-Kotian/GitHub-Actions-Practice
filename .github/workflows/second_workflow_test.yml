@@ -15,6 +15,7 @@ jobs:
       - name: Run tests
         run: npm test              # command as defined in package.json file
   deploy:                          # second job to build the code
+    needs: test                    # this "needs" keyword used to run test in series , only if "test" job is passed then only this job will run , else by default all jobs run in parallel
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
