@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: 21
       - name: Install Dependencies
-        run: npm ci               )
+        run: npm ci
       - name: Build project
         run: npm run build        # this command is part of package.json
       - name: Deploy
