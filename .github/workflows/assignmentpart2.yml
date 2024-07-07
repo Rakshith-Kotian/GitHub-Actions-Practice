@@ -1,7 +1,7 @@
 name: Output event Details if any issues created on Repository
 on:
     issues:
-      types: opened   # i modified it to trigger this workflow only when issue is opened and not closed
+      types: [opened, reopened, edited]   # i modified it to trigger this workflow only when issue is opened or reopened or edited and not closed
 jobs:
   issuesinfo:
     runs-on: ubuntu-latest
