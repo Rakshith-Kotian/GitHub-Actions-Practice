@@ -161,3 +161,16 @@ Deploy: The release version of the code is deployed to a production environment 
 Multiple Triggers/events :
 Eg: we can run a workflow for different kind of events , eg: for each push , each PR , manual run etc ....
 for that:  just give     on: [push, workflow_dispatch, any other event...] in a array format
+
+we can configure push details to specific branches / specific person etc , or PR to only main branch , we can configure anythingh based on condition , anything we can prepare
+
+**************************************
+Github Actions Experessions or Context:
+Github actions will store or provide some metadata while running jobs , we can access them using context and print them using expressions
+Eg: "github" is a context --> The github context contains information about the workflow run and the event that triggered the run. --> https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
+https://docs.github.com/en/actions/learn-github-actions/contexts
+https://docs.github.com/en/actions/learn-github-actions/expressions
+
+This will be usefull if we are perfroming actions on other repository from our repo etc , i.e: if we dont use checkout action and manually clone our repo to server and use that code, than we can see github repo logs , name etc ..
+
+**************************************
