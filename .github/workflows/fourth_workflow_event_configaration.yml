@@ -4,12 +4,18 @@ on:
   pull_request:             # first event to trigger a workflow and its configaration
     types:
       - opened
+    branches:
+        - main              # trigger workflow if PR raised to main branch only 
+    branches-ignore:
+        - DemoBranch        # ignore any PR to my demobranch ( not from demo branch to main)
   workflow_dispatch:        # second event to trigger workflow (manual)
   push:                     # second event to trigger workflow ( filter: only if committed(pushed) to main branch)
     branches:
         - main
     #   - 'dev-*' --> any branch starts with dev word    (Regex)
     #   - 'feat/**' --> all branch start with feat/ and alternative / s in branch name eg: feat/new , feat/new/button etc...
+    paths-ignore:
+        - '.github/workflow/*' # do not trigger workflow if any changes done in workflow folder , if 'paths' is used then workflow will be triggered only if file changes done in that file
 
 jobs:
   event_config_filters:
