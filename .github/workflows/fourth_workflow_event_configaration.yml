@@ -25,3 +25,4 @@ jobs:
         run: echo "Configuring events and usage of filters"
 
 # Now switch to demobranch and do some minor changes and raise a PR to trigger this workflow.
+# workflow run can be skipped by adding a specific keyword in commit mesage , refer notes for more info
