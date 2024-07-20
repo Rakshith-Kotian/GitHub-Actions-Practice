@@ -4,13 +4,18 @@ on:
   pull_request:             # first event to trigger a workflow and its configaration
     types:
       - opened
-  workflow_dispatch:        # second event to trigger workflow
+  workflow_dispatch:        # second event to trigger workflow (manual)
+  push:                     # second event to trigger workflow ( filter: only if committed(pushed) to main branch)
+    branches:
+        - main
+    #   - 'dev-*' --> any branch starts with dev word    (Regex)
+    #   - 'feat/**' --> all branch start with feat/ and alternative / s in branch name eg: feat/new , feat/new/button etc...
 
 jobs:
-  event_config:
+  event_config_filters:
     runs-on: ubuntu-latest
     steps:
-      - name: Print Something
-        run: echo "PR opened to a main branch from a Demo branch"
+      - name: Event config and filters
+        run: echo "Configuring events and usage of filters"
 
 # Now switch to demobranch and do some minor changes and raise a PR to trigger this workflow
