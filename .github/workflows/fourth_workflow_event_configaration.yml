@@ -8,9 +8,9 @@ on:
 
 jobs:
   event_config:
-    runs-on: ubuntu latest
+    runs-on: ubuntu-latest
     steps:
       - name: Print Something
         run: echo "PR opened to a main branch from a Demo branch"
-        
+
 # Now switch to demobranch and do some minor changes and raise a PR to trigger this workflow
