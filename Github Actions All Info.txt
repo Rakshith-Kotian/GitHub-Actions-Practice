@@ -178,3 +178,54 @@ This will be usefull if we are perfroming actions on other repository from our r
 Note: since build, test, deploy is done in series , we can create 3 different jobs for it or we can make as 3 steps in a single job , because if one step fails next steps wont run ( but for clarity  making different jobs is best )
 
 **************************************
+Events:
+
+Events Example : (Repo related events + non repo related events) https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+most of event has activity types for controll of events eg:  pull event has ( opened, closed,edited etc..) based on this we can trigger workflows
+some events has Filters ( to target only main branch etc ...or any other defined branches )..
+
+Activity types:
+
+we can write activity types in 2 ways ( one by one or in a array)
+on:
+  pull_request:
+    types: 
+	  - opened 
+	  - edited 
+
+or
+
+on:
+  pull_request:
+    types: 
+	  [opened, edited]
+  workflow_dispatch:                    ( added this as a second trigger event : is must while defining multiple events )
+  
+Eg: check activity types for a pull request: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request  -- these offical doc will say for which configaration workflow will be triggered by default if i dont provide any configaration eg:By default, a workflow only runs when a pull_request event's activity type is opened, synchronize, or reopened
+
+
+Main Imp:.
+Event filters : ( eg : trigger workflow only if commit is pushed to main branch )
+https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+
+Running a workflow in Main branch but using a forked repo by third person
+Eg: if a third person forked a repo and raise a PR to main branch ( pull request workflow trigger should be configured in main branch) , workflow needs approval in main branch to continue that worflow run ( in actions tab it will show approve and run option to main branch owner )( the reason is everyone can fork a public repo  or spam workflow runs in main repo) ( solution -- for first time repo/PR contributors workflow need to be approved them after any PR it will trigger workflow automatically) 
+for collaborators , workflows will run as they are co-owners ( add collaborators in github website)
+
+Cancelling workflows:
+step/job fails will cancel workflow automatically ( this can be modified/altered to continue run of other jobs if one job failed is jobs were runnign in series)
+To cancel a workflow manually goto actions tab and click cancel workflow after clicking on workflow name
+
+skipping workflows: ( for push and pull_requests auto triggered workflows)
+we can skip the workflow by adding a "commit message name [skip ci]" keyword in my commit message  ( usefull when commit is very small and workflow trigger is not required )
+
+Below are 5 keywords can be used
+[skip ci]
+[ci skip]
+[no ci]
+[skip actions]
+[actions skip]
+
+more info: https://docs.github.com/en/actions/managing-workflow-runs/skipping-workflow-runs
+
+**************************************
