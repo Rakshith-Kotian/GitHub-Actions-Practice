@@ -6,8 +6,8 @@ on:
       - opened
     branches:
         - main              # trigger workflow if PR raised to main branch only 
-    branches-ignore:
-        - DemoBranch        # ignore any PR to my demobranch ( not from demo branch to main)
+  # branches-ignore:
+  #    - DemoBranch        ignore any PR to my demobranch ( not from demo branch to main) ( branches and branches ignore cant be used together?)
   workflow_dispatch:        # second event to trigger workflow (manual)
   push:                     # second event to trigger workflow ( filter: only if committed(pushed) to main branch)
     branches:
