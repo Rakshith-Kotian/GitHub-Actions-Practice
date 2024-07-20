@@ -1,18 +1,16 @@
 #since on: push event triggers workflow for every push om any branch of that main branch, we can configure it to trigger on certain conditions only ( Eg: trigger workflow only when commit is pushed to main branch)
 name: Events Configaration
 on:
-    pull_request:                    # first event to trigger a workflow and its configaration
-        types:
-            - opened
-    workflow_dispatch:               # second event to trigger workflow 
+  pull_request:             # first event to trigger a workflow and its configaration
+    types:
+      - opened
+  workflow_dispatch:        # second event to trigger workflow
 
 jobs:
-    event_config:
-        runs-on: ubuntu latest
-        steps:
-            - name: Print Something
-              run: echo "PR opened to a main branch from a Demo branch" 
-
-
-
+  event_config:
+    runs-on: ubuntu latest
+    steps:
+      - name: Print Something
+        run: echo "PR opened to a main branch from a Demo branch"
+        
 # Now switch to demobranch and do some minor changes and raise a PR to trigger this workflow
