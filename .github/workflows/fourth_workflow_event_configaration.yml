@@ -24,4 +24,4 @@ jobs:
       - name: Event config and filters
         run: echo "Configuring events and usage of filters"
 
-# Now switch to demobranch and do some minor changes and raise a PR to trigger this workflow
+# Now switch to demobranch and do some minor changes and raise a PR to trigger this workflow.
