@@ -13,4 +13,6 @@ jobs:
         steps:                
           - name: Display env variable name
             run: |
-              echo "Username: ${{ env.USERNAME }}"
+              echo "Username: ${{ env.USERNAME }}"   
+
+# we can get env object name by using env context
