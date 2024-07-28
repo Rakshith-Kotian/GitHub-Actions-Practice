@@ -1,0 +1,63 @@
+name: Caching 
+on: workflow_dispatch
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4 
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with: 
+            path: ~/.npm      # telling github to store npm cache and use for other jobs
+            key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}   # key used to retrive cache in next jobs
+      - name: Install Dependencies
+        run: npm ci                
+      - name: Run test
+        run: npm run test
+
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    outputs:
+        script-file:  ${{ steps.publish.outputs.script-file }}       
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with: 
+            path: ~/.npm                 # here build job uses existing cache created by test job so dependency installation time (npm ci) will be reduced
+            key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install Dependencies
+        run: npm ci        
+      - name: Run Build
+        run: npm run build
+      - name: Publish generated JS filename
+        id: publish                              
+        run: find dist/assets/*.js -type f -execdir echo 'script-file={}' >> $GITHUB_OUTPUT ';'    
+      - name: Upload artefatcs
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-files
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: download job artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-files
+      - name: listing output contents
+        run: ls
+      - name: Output filename
+        run: echo "${{ needs.build.outputs.script-file }}"   
+      - name: Deploy
+        run: echo "Deployoing..."
+
+# for all job & any one flow for one github accopunt cache will be central & common ( one time installation )
+# whenever npm ci command runs , it tries to use existing cache if present from before jobs
+# if dependency if updated later , then hashkey will change & new dependencies will be updated and cached in npm folder again .... 

@@ -32,7 +32,7 @@ jobs:
       - name: listing output contents
         run: ls
       - name: Output filename
-        run: echo "${{ needs.build.outputs.script-file }}"    # just display a filename provided by build job in this job
+        run: echo "${{ needs.build.outputs.script-file }}"    # just display a filename provided by build job in this job ( open job cosole logs and check name)
       - name: Deploy
         run: echo "Deployoing..."
 
