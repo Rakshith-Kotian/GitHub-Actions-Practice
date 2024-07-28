@@ -1,4 +1,4 @@
-name: Run Build
+name: Job Artefact
 on: workflow_dispatch                         
 jobs: 
   build: 
