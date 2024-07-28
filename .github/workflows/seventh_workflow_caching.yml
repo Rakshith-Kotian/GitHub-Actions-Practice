@@ -28,7 +28,7 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v4
         with: 
-            path: ~/.npm                 # here build job uses existing cache created by test job so dependency installation time (npm ci) will be reduced
+            path: ~/.npm                 # here build job uses existing cache created by test job so dependency installation time (npm ci) will be reduced ( as long as package-lock.json dependency file is not updated , if updated then chache will also be reinstalled and updated)
             key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install Dependencies
         run: npm ci        
