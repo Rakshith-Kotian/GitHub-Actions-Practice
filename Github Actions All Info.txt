@@ -260,3 +260,24 @@ Environment Variables:
 Note: storing credentials in workflow file is not ideal , this is just an exercise ( in reality we fill using terminal etc..) ( or we can parametrize if data is not confidencial , eg: excel sheet names )
 
 https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+
+Default env variables : https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables  -- can be used to get info from github actions (these are set by default)
+
+
+Secrets:
+thisngs like passwords cant be pushed to github repo so it can be stored as a secret in github repo itself , for that
+goto --> github repo -- settings -- under security tab-- secrets -- actions -- click New Repository secret  ( give any name ( but give same name as env variable name for safer side) & add its value and save.
+Note: once secret is saved we can only update it , but its not visible in UI ( but it will bve saved )
+Note: view saved secret variables in same path as above ..
+
+Note: these secret variables can be used in any workflow or any job , to prevent that github intriduces environments 
+
+Environments:
+create a environemnt in github web , define some environment specific secrets, tag that environment to a workflow job , then that job only uses variables defined in that enviropnment only , not from general secret variables 
+
+create a environemnt:
+goto github , settings , environents , create a name for environemtn    -- > now define some scret variables and use it in job
+
+Note : for an created enviroment we can  define both env specific environment variables + secrets as well ( we can define env variable as secret if we are not using guthub environments feature , or else if we are using github environments created feature then there we can  directly creat env variables and call in github actiuons workflow file using env context )
+
+**************************************
