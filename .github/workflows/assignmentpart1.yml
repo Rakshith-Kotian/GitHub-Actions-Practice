@@ -1,5 +1,6 @@
 name: Run Lint, Test & Build Scripts
-on: push                         
+# on: push  --> turning off auto workflow run for now to learn other things ( to make github actions cleaner temporarily)
+on: workflow_dispatch                         
 jobs:
   lint:
     runs-on: ubuntu-latest

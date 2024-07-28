@@ -1,5 +1,6 @@
 name: Test Workflow
-on: [push, workflow_dispatch]                         # this test code containing workflow will be triggered after each push to the repository
+# on: [push, workflow_dispatch]                         # this test code containing workflow will be triggered after each push to the repository   --> turning off auto workflow run for now to learn other things ( to make github actions cleaner temporarily)
+on: workflow_dispatch
 jobs:
   test:
     runs-on: ubuntu-latest
