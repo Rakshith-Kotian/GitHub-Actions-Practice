@@ -11,7 +11,6 @@ on:
   workflow_dispatch:        # second event to trigger workflow (manual)
 
   # turning off below auto push run trigger off for learning other things ( remove srating 7 #s below to make it active)
-  
   # push:                     # second event to trigger workflow ( filter: only if committed(pushed) to main branch)
   #   branches:
   #       - main
