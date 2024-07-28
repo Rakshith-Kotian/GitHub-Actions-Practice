@@ -60,4 +60,5 @@ jobs:
 
 # for all job & any one flow for one github accopunt cache will be central & common ( one time installation )
 # whenever npm ci command runs , it tries to use existing cache if present from before jobs
-# if dependency if updated later , then hashkey will change & new dependencies will be updated and cached in npm folder again .... 
+# if dependency if updated later , then hashkey will change & new dependencies will be updated and cached in npm folder again ....( till then all executions will use central stored cache for this project )
+# whenever package-lock.json file is updated with new dependency then only cache will be updated , till then all workfflows which has chaching steps will use existing cache ....
