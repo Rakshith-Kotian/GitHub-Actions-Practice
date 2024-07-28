@@ -281,3 +281,7 @@ goto github , settings , environents , create a name for environemtn    -- > now
 Note : for an created enviroment we can  define both env specific environment variables + secrets as well ( we can define env variable as secret if we are not using guthub environments feature , or else if we are using github environments created feature then there we can  directly creat env variables and call in github actiuons workflow file using env context )
 
 **************************************
+
+Controlling workflow & Job steps:
+
+Eg: only upload test report if test fails ( if test passed report no need to be uploaded as all passed)
