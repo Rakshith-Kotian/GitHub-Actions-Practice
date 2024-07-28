@@ -3,7 +3,7 @@ name: Environment variables Setup
 on: workflow_dispatch
 env:                        # workflow level env variables ( can be used for all jobs)
     USERNAME: John Doe
-    PASSWORD: johndoe123
+    PASSWORD: ${{ secrets.PASSWORD }}  # im getting passwords from secrets stored in github website ( see notes ) 
 jobs:
     test: 
         env:                # job level env variables ( only for this job)
@@ -16,4 +16,5 @@ jobs:
               echo "Username is: ${{ env.USERNAME }}"
               echo "ExcelWorkbookName is: ${{ env.EXCELWORKBOOKNAME }}"   
 
+#Note : secret values cannot be printed , github actions hides the access of secrets from env context
 # we can get env object name by using env context
