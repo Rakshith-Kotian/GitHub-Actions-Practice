@@ -14,4 +14,5 @@ jobs:
           - name: Get Code
             uses: actions/checkout@v4                 
           - name: Display env variable name
-            run:  echo "Username: ${{ env.USERNAME }}"
+            run: |
+              echo "Username: ${{ env.USERNAME }}"
