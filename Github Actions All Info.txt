@@ -238,6 +238,12 @@ We use upload artefact(https://github.com/actions/upload-artifact) action to rec
 so once job is run we can download creaqted job artefact from actions tab in github as a zip file ( we can download it and check reports)
 
 since each and every job runs on different server , one job artefact created by one job wont be accessible in another job directly
-for downloading artifact we use download artifact action (https://github.com/actions/download-artifact)
+for downloading artifact we use download artifact action (https://github.com/actions/download-artifact)  & run "ls" command to list unzipped content files...
 
 Note: artefact created(uploaded) by one job , downloaded and used in another job ( in my example) 
+Note: click on specific job names inside the workflow to see or download their contents..
+Note: this is usefull to get & send or upload final report to desired location or  people ....
+
+Job Outputs -- simple values outputted by a job ( Eg: just name of the file generated in on job & just name matters in another job )( so making just the name as a value in one job so we can use in another job)
+
+https://docs.github.com/en/actions/learn-github-actions/contexts  imp - used in job output name setup & display 

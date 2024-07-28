@@ -36,4 +36,6 @@ jobs:
         - name: Deploy
           run: echo "Deployoing..."
 
+# here im downloading artefact created by first build job ( auto unzips it) & just listing its contents & next steps .. ( deploy)
 # here needs: build is must ,because withour creating artefact we cant download it parallally
+

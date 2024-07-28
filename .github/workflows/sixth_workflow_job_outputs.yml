@@ -1,0 +1,39 @@
+name: Job Outputs
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+        script-file:  ${{ steps.publish.outputs.script-file }}        # creating any unique output identifier name for accessing my output value ( in same or other jobs)
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run Build
+        run: npm run build
+      - name: Publish generated JS filename
+        id: publish                              # create a id for step for linking with output identifier
+        run: find dist/assets/*.js -type f -execdir echo 'script-file={}' >> $GITHUB_OUTPUT ';'     # linux command to display a desired file name ( also assigns this value to created output identifie above)
+      - name: Upload artefatcs
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-files
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: download job artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-files
+      - name: listing output contents
+        run: ls
+      - name: Output filename
+        run: echo "${{ needs.build.outputs.script-file }}"    # just display a filename provided by build job in this job
+      - name: Deploy
+        run: echo "Deployoing..."
+
+# https://docs.github.com/en/actions/learn-github-actions/contexts 
