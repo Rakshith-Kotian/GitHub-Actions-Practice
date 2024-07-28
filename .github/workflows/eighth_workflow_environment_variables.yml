@@ -3,7 +3,7 @@ name: Environment variables Setup & Secrets
 on: workflow_dispatch
 env:                        # workflow level env variables ( can be used for all jobs)
     USERNAME: John Doe
-    PASSWORD: ${{ secrets.PASSWORD }}  # im getting passwords from secrets stored in github website ( see notes ) 
+    PASSWORD: ${{ secrets.PASSWORD }}  # im getting passwords from secrets stored in github website ( see notes to learn how to save a secret variable in github website ) 
 jobs:
     test: 
         env:                # job level env variables ( only for this job)
