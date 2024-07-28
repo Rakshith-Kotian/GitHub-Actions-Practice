@@ -1,4 +1,4 @@
-name: Environment variables Setup
+name: Environment variables Setup & Secrets
 # Note: storing credentials in workflow file is not ideal , this is just an exercise
 on: workflow_dispatch
 env:                        # workflow level env variables ( can be used for all jobs)
@@ -16,5 +16,5 @@ jobs:
               echo "Username is: ${{ env.USERNAME }}"
               echo "ExcelWorkbookName is: ${{ env.EXCELWORKBOOKNAME }}"   
 
-#Note : secret values cannot be printed , github actions hides the access of secrets from env context
+# Note : secret values cannot be printed , github actions hides the access of secrets from env context
 # we can get env object name by using env context
