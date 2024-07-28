@@ -1,4 +1,4 @@
-name: Job Artefact
+name: Job Artefact Upload and Download
 on: workflow_dispatch                         
 jobs: 
   build: 
@@ -14,9 +14,26 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
             name: dist-files
-            path: |
-                dist
-                package.json    
+            path: dist
+            # path: |
+            #     dist
+            #     package.json    
 
-# above im making 1 folder(dist) and 1 file(package.json) as one job artefact
+# above im making 1 folder(dist) and 1 file(package.json) as one job artefact ( download this artefact in actions tab after clicking on this workflow name once job is ran )
+# if i need to make multiple folder or file into an job artefact , give multile paths one by one using | symbol ( like above commented piece of code)
 # Refer https://github.com/actions/upload-artifact for all configaration info ( include some file , exclude some file etc..)
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+        - name: download job artifacts
+          uses: actions/download-artifact@v4
+          with:
+              name: dist-files   #name must be same as upload artefact step ( for zip & unzip purpose)
+        - name: listing output contents
+          run: ls                # ls command just displays content of currently in folder
+        - name: Deploy
+          run: echo "Deployoing..."
+
+# here needs: build is must ,because withour creating artefact we cant download it parallally
