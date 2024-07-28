@@ -247,3 +247,16 @@ Note: this is usefull to get & send or upload final report to desired location o
 Job Outputs -- simple values outputted by a job ( Eg: just name of the file generated in on job & just name matters in another job )( so making just the name as a value in one job so we can use in another job)
 
 https://docs.github.com/en/actions/learn-github-actions/contexts  imp - used in job output name setup & display 
+
+Caching:
+some steps repeated in every job eg: downloading dependencies ( will take more time )
+so we can install dependency in one job once , cache it , & use it in another job ( it reduces overall time if jobs are running in series )
+
+we use cache action foir this https://github.com/actions/cache
+
+**************************************
+
+Environment Variables:
+Note: storing credentials in workflow file is not ideal , this is just an exercise ( in reality we fill using terminal etc..) ( or we can parametrize if data is not confidencial , eg: excel sheet names )
+
+https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions

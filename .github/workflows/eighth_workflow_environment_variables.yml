@@ -1,0 +1,17 @@
+name: Environment variables Setup
+# Note: storing credentials in workflow file is not ideal , this is just an exercise
+on: workflow_dispatch
+env:                        # workflow level env variables ( can be used for all jobs)
+    USERNAME: jhasf
+    PASSWORD: aqfwe
+jobs:
+    test: 
+        env:                # job level env variables ( only for this job)
+            EXCELWORKBOOKNAME: jakshf
+            EXCELSHEETNAME: hreuhg
+        runs-on: ubuntu-latest
+        steps:
+          - name: Get Code
+            uses: actions/checkout@v4                 
+          - name: Display env variable name
+            run:  echo "Username: ${{ env.USERNAME }}"
