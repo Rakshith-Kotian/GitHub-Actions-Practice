@@ -1,4 +1,4 @@
-name: Controlling workflow using if statement
+name: Controlling steps workflow using if statement
 on: workflow_dispatch                         
 jobs:
   buildfail:
