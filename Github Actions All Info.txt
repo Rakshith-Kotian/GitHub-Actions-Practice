@@ -287,6 +287,14 @@ Controlling workflow & Job steps:
 Eg: only upload test report if test fails ( if test passed report no need to be uploaded as all passed) this can be done using if statements
 
 we can add id to any step , it can tell if that step is failed or not , in next step if statement we can get execution status of last step using id 
+The output/ conclusion or outcome of a step can be retrivied by steps context,  https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/contexts#steps-context   ( for conclusion we have : success, failure, cancelled, or skipped. When a continue-on-error) which is used alonmg with 
+special conditonal functions 
+1) failure() - returns true when any previous steps or jobs failed
+2) success() - returns true when none of the previous steps or jobs failed
+3) always () - causes the steps to always execute even when cancelled
+4) cancelled() - returns true if workflow has been cancelled
 
+# failure() && steps.run-build.conclusion == 'failure'  --> this will make sure that if previous steps or jobs failed then reporting wont occur( this is must because in some case installing dependency also might fail so that failure() function returns true and reporting wont occur as build step itself wont run if dependency failed, so no reporting required 1 && 0 == 0 ) ( if previous steps passed and just build failed then , failure retunrs 1 and conclusion also will be 1 so 1 && 1 ==1 so reporting occurs)
+# similarly success also works like this
 
-the output/ conclusion or outcome of a step can be retrivied by steps context https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/contexts#steps-context
+operators used in github actions: https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/expressions

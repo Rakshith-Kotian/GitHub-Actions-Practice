@@ -39,3 +39,5 @@ jobs:
           path: dist
 
 # the second job here uploads report only if build succeeds 
+# failure() && steps.run-build.conclusion == 'failure'  --> this will make sure that if previous steps or jobs failed  then reporting wont run ( this is must because in some case installing dependency also might fail so that failure() function returns true and reporting wont occur as build step itself wont run if dependency failed, so no reporting required 1 && 0 == 0 ) ( if previous steps passed and just build failed then , failure retunrs 1 and conclusion also will be 1 so 1 && 1 ==1 so reporting occurs)
+# similarly success also works like this
