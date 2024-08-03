@@ -368,3 +368,9 @@ mongo public image : https://hub.docker.com/_/mongo
 Service container :  uses whenever required and shuts down after work , runs inside a container
 
 also we can do communication between jobs and containers ...
+
+**************************************
+
+Custom actions:
+* simplify workflow steps
+* multiple steps can be minimized to single custom action
