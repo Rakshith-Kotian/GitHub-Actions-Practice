@@ -16,9 +16,10 @@ jobs:
           name: dist-files
           path: dist
 
-# below is a conditional job 
+# below is a conditional job  ( make sure it runs in series)
 # this job only run if failure() is true. that is if any previous job (  here its build job )is failed then only reporting job will run
   reporting:
+    needs: build
     if: failure()
     runs-on: ubuntu-latest
     steps:
