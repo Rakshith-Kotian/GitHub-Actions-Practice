@@ -13,3 +13,5 @@ jobs:
         run: npm run testing    # gave wrong command to fail test
       - name: report
         run: echo " this step is executed even if test step failed due to continue on error statement" 
+
+# also if i open this job now in actions tab , it will show error too in the woprkflow level
