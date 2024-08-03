@@ -2,6 +2,7 @@ name: Matrix Demo
 on: workflow_dispatch
 jobs:
     build:
+        continue-on-error: true   
         strategy:
             matrix:
                 node-version: [12,14,16]
@@ -19,5 +20,8 @@ jobs:
             - name: Run Build
               run: npm run build 
 
+# here i have 6 combinations , some will fail so other combinations it might not run  ( so i added continue-on error : true , so even if first combination fails other combination jobs will run)
+# Note: continue-on-error can be added at job level too , so series of job will continue even if previous job fails
 # matrix key can be any , but it should be mapped corrrectly
 # usefull top run codes in multiple versions
+# Note: all combinations might not pass as each verison , operationg system might have some limitations or might not have proper dependencies
