@@ -345,5 +345,17 @@ strategy:
                     - node-version: 12
                       operating-system: windows-latest		
 
-Combinations : 12-ubuntu , 14-ubuntu, 16-ubuntu, 14-windows, 16- windows					  
-              
+Combinations : 12-ubuntu , 14-ubuntu, 16-ubuntu, 14-windows, 16- windows
+
+**************************************
+
+Containers ( Docker Containers ): --> packages that contain code + its execution environment
+We can run github workflows in container or runner machines
+
+container --> full controll over environment & installed software
+runners --> predefined operating system and softwares
+
+we can run workflow on docker container , then container itself runs & hosted by github action runner machines ( but steps will be run inside container and not in runners )
+
+Docker must be installed in system
+Repo will contain a docker file , it will create a docker image to run containers
