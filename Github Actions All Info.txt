@@ -284,4 +284,9 @@ Note : for an created enviroment we can  define both env specific environment va
 
 Controlling workflow & Job steps:
 
-Eg: only upload test report if test fails ( if test passed report no need to be uploaded as all passed)
+Eg: only upload test report if test fails ( if test passed report no need to be uploaded as all passed) this can be done using if statements
+
+we can add id to any step , it can tell if that step is failed or not , in next step if statement we can get execution status of last step using id 
+
+
+the output/ conclusion or outcome of a step can be retrivied by steps context https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/contexts#steps-context
