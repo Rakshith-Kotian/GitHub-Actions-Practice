@@ -1,4 +1,5 @@
 # since for build i already have a workflow/job , by mentioning its path i can call that workflow here for deploying
+# open and check deploy step in github actions , it displays exact output as mentioned in reusable workflow part 1
 name: Reusable Workflow Part 2
 on: workflow_dispatch
 jobs:
@@ -41,7 +42,9 @@ jobs:
   deploy:
     needs: build
     uses: ./.github/workflows/fourteenth_workflow_reusable_workflow_part1.yml
-
+    # passing the expected file to the calling workflow
+    with:
+        artifact-name: dist-files
   reporting:
     needs: [lint, deploy]
     if: failure()
