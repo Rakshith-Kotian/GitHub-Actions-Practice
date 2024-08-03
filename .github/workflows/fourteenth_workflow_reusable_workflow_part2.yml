@@ -45,6 +45,18 @@ jobs:
     # passing the expected file to the calling workflow
     with:
         artifact-name: dist-files
+    # if i have any sercret to pass to the calling workflow send like below
+   #secrets:
+   #    some-secret: $&{{ secrets.some-secret }}   --> remove & 
+
+  # get the deploy job output from called workflow and print
+  print-deploy-result:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print deploy output
+        run: echo "${{ needs.deploy.outputs.result }}"
+
   reporting:
     needs: [lint, deploy]
     if: failure()
