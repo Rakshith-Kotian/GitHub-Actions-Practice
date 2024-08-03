@@ -26,4 +26,4 @@ jobs:
 # if i use workflow_call event that means this workflow can be called in other workflow ( i can use [ workflow_dispatch, push, workflow_call ] like this too if required)( usually general workflows will be only callable by other workflows)
 # here for deploying we need a code/ report so after receiving/downloading that code from called workflow we are deploying the same to destination
 # inputs is a new github context.. used to receive inputs from other workflow
-# inputs is a github action keyword , using that we define what type of file we are receiving here from called workflow ( under inputs we can user our own keys and its values)
+# inputs is a github action keyword , using that we define what type of file we are receiving here from called workflow ( under inputs we can user our own keys and but keys for its values are predefined  description, required,default,type etc .. ( hover over those keywords and check what it is))
