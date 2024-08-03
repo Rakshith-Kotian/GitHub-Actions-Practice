@@ -60,5 +60,6 @@ jobs:
       - name: Say us if any one or more previous job is failed 
         run: echo " Report Uploaded!..."
 
-# here lint runs signle , test,build,deploy runs in series -- reporting runs at last ( it needs both lint and other jobs which ran in series) ( if any previous job fails then only reporting will run)
+# here lint runs signle , test,build,deploy runs in series -- reporting runs at last ( it needs both lint and other chained jobs which ran in series) ( if any previous job ( either lint alone or any chained job) fails then only reporting will run)
 # just alter the command of any jobs to make it fail 
+

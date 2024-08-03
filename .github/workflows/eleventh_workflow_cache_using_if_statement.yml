@@ -1,0 +1,22 @@
+name: Caching using if
+on: workflow_dispatch
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4 
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v4
+        with: 
+            path: ~/.npm 
+            key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}   
+      - name: Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci                
+      - name: Run test
+        run: npm run test
+
+
+# https://github.com/actions/cache --> as shown here cache action outputs a field called 'cache-hit' , if its not true then install dependency , else dependency installation not required  ( same steps can be used in all jobs from line 9 to 17 )
