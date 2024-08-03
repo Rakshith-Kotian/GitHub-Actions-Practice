@@ -359,3 +359,12 @@ we can run workflow on docker container , then container itself runs & hosted by
 
 Docker must be installed in system
 Repo will contain a docker file , it will create a docker image to run containers
+
+
+Public docker images: https://hub.docker.com/ ( we can use these existing images to run workflows )
+Node public image : https://hub.docker.com/_/node
+mongo public image : https://hub.docker.com/_/mongo
+
+Service container :  uses whenever required and shuts down after work , runs inside a container
+
+also we can do communication between jobs and containers ...
