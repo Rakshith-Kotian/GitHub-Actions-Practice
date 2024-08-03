@@ -1,4 +1,4 @@
-name: Controlling Jopbs workflow using if statement
+name: Controlling Jobs workflow
 on: workflow_dispatch                         
 jobs:
   build:
@@ -23,4 +23,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Say us if any one or more previous job is failed 
-        run: echo " Report Uploaded"
+        run: echo " Report Uploaded!..."
