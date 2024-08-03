@@ -18,7 +18,7 @@ jobs:
       - name: Upload artefatcs
         uses: actions/upload-artifact@v4
         with:
-          name: dist-files
+          name: dist-files      # if i click workflow then uploaded file will be availbale by this name in github actions ( ran workflow tab)( if not click job where report is uplaoded and it will show a download URL under upload report step..)
           path: dist
 
   deploy:

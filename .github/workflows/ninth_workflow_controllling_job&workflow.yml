@@ -9,7 +9,7 @@ jobs:
       - name: Install Dependencies
         run: npm ci                
       - name: Run build
-        id: run-build           # add a id to required step to verify this step passed or failed in reporting step
+        id: run-build           # add a id to required step to verify this step passed or failed in other conditional(ifetc) steps
         run: npm run build
       - name: Upload build report only if run build step fails   # fail the build test just by doing some code manipulation in build code & if passed report wont be zipped in github actions job tab.
         if: failure() && steps.run-build.conclusion == 'failure'   
