@@ -305,3 +305,45 @@ operators used in github actions: https://docs.github.com/en/actions/writing-wor
 
 Conditional jobs:
 failure(), success(),always(),cancelled() is also availbale for job level similar to step level ( so next jobs will run conditonally based on previous jobs based on its pass or fail status)
+
+
+Matrix:
+we can run same job in multiple configarations using matrix ( job level )
+eg: if job didnt run in ubuntu latest , it can run in windows
+eg: if node version 14 not working for my code then , i can install node version 15 and run 
+Note: if i provide array of values then all combinations run in parallel 
+
+2 operating system , 3 node version is six combination 2*3 =6 
+
+Eg:
+strategy:
+            matrix:
+                node-version: [12,14,16]
+                operating-system: [ubuntu-latest, windows-latest]
+
+Combinations : 12-ubuntu , 14-ubuntu, 16-ubuntu , 12-windows, 14-windows, 16- windows
+
+Include Keyword: --> used to include more set of combination which is not required to run for all combinations 
+Eg:
+strategy:
+            matrix:
+                node-version: [12,14,16]
+                operating-system: [ubuntu-latest, windows-latest]
+                include:
+                    - node-version: 18
+                      operating-system: ubuntu-latest
+
+Combinations : 12-ubuntu , 14-ubuntu, 16-ubuntu , 12-windows, 14-windows, 16- windows + 18-ubuntu only ( whatever combination we include in include keyword that is additional to existing combination and it wont be added to all existing combination i.e 18-windows wont be a combinaions)
+
+Exclude Keyword: --> used to exclude some combinations from all combinations
+Eg:
+strategy:
+            matrix:
+                node-version: [12,14,16]
+                operating-system: [ubuntu-latest, windows-latest]
+                exclude:
+                    - node-version: 12
+                      operating-system: windows-latest		
+
+Combinations : 12-ubuntu , 14-ubuntu, 16-ubuntu, 14-windows, 16- windows					  
+              

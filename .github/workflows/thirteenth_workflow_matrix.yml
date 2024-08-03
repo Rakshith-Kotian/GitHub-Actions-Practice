@@ -7,6 +7,12 @@ jobs:
             matrix:
                 node-version: [12,14,16]
                 operating-system: [ubuntu-latest, windows-latest]
+                include:
+                    - node-version: 18
+                      operating-system: ubuntu-latest
+                exclude:
+                    - node-version: 12
+                      operating-system: windows-latest
         runs-on: ${{ matrix.operating-system }}
         steps:
             - name: Get Code
@@ -25,3 +31,4 @@ jobs:
 # matrix key can be any , but it should be mapped corrrectly
 # usefull top run codes in multiple versions
 # Note: all combinations might not pass as each verison , operationg system might have some limitations or might not have proper dependencies
+# include & exclude is github action defined keyword ( under matrix other keywords can be user defined)
