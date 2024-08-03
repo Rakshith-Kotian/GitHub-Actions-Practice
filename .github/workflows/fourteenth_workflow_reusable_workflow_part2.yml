@@ -55,7 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print deploy output
-        run: echo "${{ needs.deploy.outputs.result }}"
+        run: echo "${{ needs.deploy.outputs.result }}"  #needs is also a github context
 
   reporting:
     needs: [lint, deploy]
@@ -64,3 +64,5 @@ jobs:
     steps:
       - name: Say us if any one or more previous job is failed
         run: echo " Report Uploaded!..."
+
+# once this workflow run is completed , open print-deploy-result job and check if it gives success as output ( as we specified in resuable workflow part 1)
