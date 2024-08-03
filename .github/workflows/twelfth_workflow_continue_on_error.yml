@@ -1,0 +1,15 @@
+name: Continue on error
+on: workflow_dispatch
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4    
+      - name: Install Dependencies
+        run: npm ci                
+      - name: Run test
+        continue-on-error: true
+        run: npm run testing    # gave wrong command to fail test
+      - name: report
+        run: echo " this step is executed even if test step failed due to continue on error statement" 
