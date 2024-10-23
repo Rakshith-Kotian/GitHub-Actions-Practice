@@ -1,0 +1,92 @@
+name: Custom Deployment Notification with different input types
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      GREETING:
+        description: 'Enter greeting for the message'
+        required: false
+        default: 'Hello'
+        type: string  # String input type
+
+      RECIPIENT:
+        description: 'Select the recipient of the message'
+        required: false
+        default: 'Team'
+        type: choice  # Dropdown (choice) input type
+        options:
+          - Team
+          - Developers
+          - Users
+
+      ENVIRONMENT:
+        description: 'Select deployment environment'
+        required: false
+        default: 'Staging'
+        type: choice  # Dropdown (choice) input type
+        options:
+          - Staging
+          - Production
+          - Development
+
+      PLATFORM:
+        description: 'Enter the platform to notify (GitHub, Slack, Email, etc.)'
+        required: false
+        default: 'GitHub'
+        type: string  # String input type
+
+      TASK:
+        description: 'Select task to notify about'
+        required: false
+        default: 'Deployment'
+        type: choice  # Dropdown (choice) input type
+        options:
+          - Deployment
+          - Build
+          - Testing
+
+      INCLUDE_LOGS:
+        description: 'Include deployment logs in the notification?'
+        required: false
+        default: false
+        type: boolean  # Boolean input type (true/false)
+
+      RETRY_COUNT:
+        description: 'Number of retries if the deployment fails'
+        required: false
+        default: 3
+        type: integer  # Integer input type
+
+jobs:
+  send-notification:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Send notification
+      env:
+        GREETING: ${{ github.event.inputs.GREETING }}
+        RECIPIENT: ${{ github.event.inputs.RECIPIENT }}
+        ENVIRONMENT: ${{ github.event.inputs.ENVIRONMENT }}
+        PLATFORM: ${{ github.event.inputs.PLATFORM }}
+        TASK: ${{ github.event.inputs.TASK }}
+        INCLUDE_LOGS: ${{ github.event.inputs.INCLUDE_LOGS }}
+        RETRY_COUNT: ${{ github.event.inputs.RETRY_COUNT }}
+      run: |
+        echo "Sending notification to ${{ env.RECIPIENT }} in the ${{ env.ENVIRONMENT }} environment."
+        echo "${{ env.GREETING }}, ${{ env.RECIPIENT }}!"
+        echo "Platform: ${{ env.PLATFORM }}"
+        echo "Task: ${{ env.TASK }}"
+        echo "Include logs: ${{ env.INCLUDE_LOGS }}"
+        echo "Retry count set to: ${{ env.RETRY_COUNT }}"
+
+        if [ "${{ env.INCLUDE_LOGS }}" = "true" ]; then
+          echo "Attaching deployment logs to the notification..."
+        else
+          echo "No logs will be included."
+        fi
