@@ -1,0 +1,78 @@
+# this workflow will create a dropdown or textbox.. etc to pick values for manual run and then those are assigned to env variables for usage and passed to code in that runner as env variable..
+# there are some default dropdown values select incase this workflow triggered by on push ..
+# still prefered to keep high secure data in secrets ( still I don't think it can be used in codes like it cant be printed but chekc once..)( since all can see that data in github actions if printed inside runner etc..)
+
+name: Deploy Notification Message
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      GREETING:
+        description: 'Select greeting for the message'
+        required: false
+        default: 'Hello'
+        type: choice
+        options:
+          - Hello
+          - Hi
+          - Greetings
+      RECIPIENT:
+        description: 'Select the recipient of the message'
+        required: false
+        default: 'Team'
+        type: choice
+        options:
+          - Team
+          - Developers
+          - Users
+      ENVIRONMENT:
+        description: 'Select deployment environment'
+        required: false
+        default: 'Staging'
+        type: choice
+        options:
+          - Staging
+          - Production
+          - Development
+      PLATFORM:
+        description: 'Select platform to notify'
+        required: false
+        default: 'GitHub'
+        type: choice
+        options:
+          - GitHub
+          - Slack
+          - Email
+      TASK:
+        description: 'Select task to notify about'
+        required: false
+        default: 'Deployment'
+        type: choice
+        options:
+          - Deployment
+          - Build
+          - Testing
+
+jobs:
+  send-notification:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Send notification
+      env:
+        GREETING: ${{ github.event.inputs.GREETING }}
+        RECIPIENT: ${{ github.event.inputs.RECIPIENT }}
+        ENVIRONMENT: ${{ github.event.inputs.ENVIRONMENT }}
+        PLATFORM: ${{ github.event.inputs.PLATFORM }}
+        TASK: ${{ github.event.inputs.TASK }}
+      run: |
+        echo "Sending notification to ${{ env.RECIPIENT }} in the ${{ env.ENVIRONMENT }} environment."
+        echo "${{ env.GREETING }}, ${{ env.RECIPIENT }}!"
+        echo "Platform: ${{ env.PLATFORM }}"
+        echo "Task: ${{ env.TASK }}"
