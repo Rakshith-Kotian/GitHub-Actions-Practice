@@ -1,9 +1,6 @@
 name: Test Greet Action
 
-on:
-  push:
-    branches:
-      - main
+on: workflow_dispatch
 
 jobs:
   greet:
@@ -17,7 +14,8 @@ jobs:
         with:
           node-version: '14'  # Specify the Node.js version
 
-      - name: Install Dependencies
+# installing dependency mentioned in package.json file inside actions folder...
+      - name: Install Dependencies   
         run: |
           cd .github/actions/greetAction
           npm install
@@ -26,3 +24,7 @@ jobs:
         uses: ./.github/actions/greetAction  # Path to your action
         with:
           username: "World"
+
+
+# the actions can be in different folders along with its dependency files , but action  file should be named with action.yml only
+# every action will have its own logic and package file etc...
