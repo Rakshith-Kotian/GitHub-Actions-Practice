@@ -1,0 +1,67 @@
+name: Update Changelog
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+#      - name: Set up Node.js (optional, if you need it for any tools)
+#        uses: actions/setup-node@v2
+#        with:
+#         node-version: '14'  # You can change this to your required Node.js version
+
+      - name: Generate Changelog
+        run: |
+          # Set variables
+          CHANGELOG_FILE="CHANGELOG.md"
+          TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
+
+          # Check if CHANGELOG.md exists, if not, create it
+          if [ ! -f "$CHANGELOG_FILE" ]; then
+            echo "# Changelog" > "$CHANGELOG_FILE"
+            echo "" >> "$CHANGELOG_FILE"
+          fi
+
+          # Get the latest commit message
+          LAST_COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+
+          # Append the commit message to the changelog
+          echo "## [Unreleased] - $TIMESTAMP" >> "$CHANGELOG_FILE"
+          echo "- $LAST_COMMIT_MESSAGE" >> "$CHANGELOG_FILE"
+          echo "" >> "$CHANGELOG_FILE"
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.name "github-actions"
+          git config --local user.email "github-actions@github.com"
+          git add CHANGELOG.md
+          git commit -m "Update CHANGELOG.md for latest commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+# Explanation
+# Trigger: This workflow triggers on every push to the main branch.
+
+# Job: The job update-changelog runs on the latest version of Ubuntu.
+
+# Steps:
+
+# Checkout Code: Checks out your repository code.
+# Set up Node.js: (Optional) If you need Node.js for any tools, otherwise you can skip this step.
+# Generate Changelog:
+# Checks if CHANGELOG.md exists. If not, it creates one with a header.
+# Retrieves the latest commit message.
+# Appends the commit message along with a timestamp to the CHANGELOG.md.
+# Commit and Push Changes: Commits the updated CHANGELOG.md and pushes it back to the repository using the provided GitHub token
+
+
+# more sofesticated change log can be done by using https://github.com/conventional-changelog/conventional-changelog 
