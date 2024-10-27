@@ -55,7 +55,12 @@ on:
         description: 'Number of retries if the deployment fails'
         required: false
         default: 3
-        type: integer  # Integer input type
+        type: number  # Integer input type
+
+      OTHER:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true
 
 jobs:
   send-notification:
