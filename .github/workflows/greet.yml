@@ -1,0 +1,15 @@
+name: Test Greet Action
+
+on: workflow_dispatch
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Run Greet Action
+        uses: ./github/actions/greetAction/greetAction.yml # Path to your action
+        with:
+          username: "World"
