@@ -1,17 +1,18 @@
+# 5 types of input in githb actions are string, number,choice ,environment, boolean
 name: Custom Deployment Notification with different input types
 
 on:
   workflow_dispatch:
     inputs:
       GREETING:
-        description: 'Enter greeting for the message'
-        required: false
-        default: 'Hello'
+        description: 'Enter greeting for the message'  # descripton shows above that input field
+        required: false  # to make this as mandatory/non mandatory field
+        default: 'Hello' # default selected value
         type: string  # String input type
 
       RECIPIENT:
         description: 'Select the recipient of the message'
-        required: false
+        required: true
         default: 'Team'
         type: choice  # Dropdown (choice) input type
         options:
