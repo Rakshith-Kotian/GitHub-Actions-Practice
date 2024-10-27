@@ -20,14 +20,10 @@ on:
           - Users
 
       ENVIRONMENT:
-        description: 'Select deployment environment'
-        required: false
-        default: 'Staging'
-        type: choice  # Dropdown (choice) input type
-        options:
-          - Staging
-          - Production
-          - Development
+        description: 'Select an environment'
+        required: true
+        default: 'Test'
+        type: environment # environment input type:  this lists the already available environments in github repo --> setttings & environments ( no need to define options manually)
 
       PLATFORM:
         description: 'Enter the platform to notify (GitHub, Slack, Email, etc.)'
@@ -49,18 +45,13 @@ on:
         description: 'Include deployment logs in the notification?'
         required: false
         default: false
-        type: boolean  # Boolean input type (true/false)
+        type: boolean  # Boolean input type (true/false) ( cehckbox)
 
       RETRY_COUNT:
         description: 'Number of retries if the deployment fails'
         required: false
         default: 3
-        type: number  # Integer input type
-
-      OTHER:
-        description: 'Environment to run tests against'
-        type: environment
-        required: true
+        type: number  # number input type
 
 jobs:
   send-notification:
