@@ -8,5 +8,5 @@ inputs:
     description: "Name of the user to greet"
     required: true
 runs:
-  using: "node12"
-  main: "index.js"
+  using: "node12"  # Specify the Node.js version
+  main: "index.js"  # Entry point for the action

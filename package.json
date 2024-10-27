@@ -8,14 +8,12 @@
     "lint": "eslint --ext .jsx --fix src",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest run",
-    "actiontest": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest run"
   },
   "dependencies": {
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@actions/core": "^1.10.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",

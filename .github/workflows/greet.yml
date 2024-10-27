@@ -10,6 +10,6 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run Greet Action
-        uses: ./.github/actions/greetAction/greetAction.yml # Path to your action
+        uses: ./.github/actions/greetAction  # Path to your action
         with:
           username: "World"
