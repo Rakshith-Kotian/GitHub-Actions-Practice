@@ -1,0 +1,19 @@
+# sometimes one repo might contain multiple sub projects/folders that time we need cd command to move inside that folder and then run contensts present inside that folder ( to move to inside folder use cd commands)
+
+name: List Directory Items
+
+on: workflow_dispatch
+
+jobs:
+  list-items:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Navigate to Directory and List Items
+        run: |
+          cd src
+          ls
+# cd command takes the terminal to src folder and then next "ls" command runs there
+# so in case of multiple projects move to that specific folder and run related commands there..
