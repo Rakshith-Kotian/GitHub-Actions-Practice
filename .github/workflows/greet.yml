@@ -1,6 +1,9 @@
 name: Test Greet Action
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   greet:
@@ -8,6 +11,16 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Specify the Node.js version
+
+      - name: Install Dependencies
+        run: |
+          cd .github/actions/greetAction
+          npm install
 
       - name: Run Greet Action
         uses: ./.github/actions/greetAction  # Path to your action
