@@ -1,4 +1,4 @@
-![](https://github.com/RAKSHITH-KOTIAN/GITHUB-ACTIONS-PRACTICE/workflows/greet.yml/badge.svg)
+# Badge: ![](https://github.com/Rakshith-Kotian/GITHUB-ACTIONS-PRACTICE/workflows/greet/badge.svg)
 ![Issues](https://img.shields.io/github/issues/myusername/myproject)
 # GitHub-Actions-Practice
 
