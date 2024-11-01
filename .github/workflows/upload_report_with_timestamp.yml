@@ -33,7 +33,6 @@ jobs:
         run: npm run build
 
       - name: Set Report Name
-        id: report_name
         run: echo "REPORT_NAME=TestReport_$(TZ='Asia/Kolkata' date +'%Y%m%d_%H%M%S')" >> $GITHUB_ENV
 
       - name: Upload Report
