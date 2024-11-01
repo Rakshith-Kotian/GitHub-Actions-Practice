@@ -29,7 +29,7 @@ jobs:
           uses: actions/download-artifact@v4
           with:
               name: TestReport
-              path: Reports/new
+              path: Reports
               
         # - name: download  
         #   run: |
@@ -38,3 +38,5 @@ jobs:
         #     gh run download --name TestReport --dir ./Reports
 
 # do and try it in future..
+# note github manages artefacts in cloud and cant use download artefact action to download to local , download artefact actiuon  to used to get artefacts in different jobs inside runner itself..
+# other way to download artefact are through github api and github cli learn it..
