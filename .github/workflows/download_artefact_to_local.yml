@@ -32,7 +32,8 @@ jobs:
               
         - name: download  
           run: |
-            echo "Downloading the Playwright report..."
+            echo "Downloading the Test report..."
             gh auth login --with-token <<< "$GITHUB_TOKEN"
             gh run download --name TestReport --dir ./Reports
 
+# do and try it in future..
