@@ -1,4 +1,6 @@
 # fix issue with Personal access token maybe .. ( or try in private repo )
+# i disabled this workflow , enable this in github actions tab..
+
 name: Update Changelog
 
 on:
@@ -12,11 +14,6 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-
-#      - name: Set up Node.js (optional, if you need it for any tools)
-#        uses: actions/setup-node@v2
-#        with:
-#         node-version: '14'  # You can change this to your required Node.js version
 
       - name: Generate Changelog
         run: |
@@ -51,11 +48,8 @@ jobs:
 
 # Explanation
 # Trigger: This workflow triggers on every push to the main branch.
-
 # Job: The job update-changelog runs on the latest version of Ubuntu.
-
 # Steps:
-
 # Checkout Code: Checks out your repository code.
 # Set up Node.js: (Optional) If you need Node.js for any tools, otherwise you can skip this step.
 # Generate Changelog:
@@ -66,3 +60,9 @@ jobs:
 
 
 # more sofesticated change log can be done by using https://github.com/conventional-changelog/conventional-changelog 
+
+# setup node js step --> add only if necessary
+#      - name: Set up Node.js (optional, if you need it for any tools)
+#        uses: actions/setup-node@v2
+#        with:
+#         node-version: '14'  # You can change this to your required Node.js version
