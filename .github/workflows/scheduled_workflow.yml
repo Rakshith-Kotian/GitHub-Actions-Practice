@@ -1,5 +1,6 @@
 name: Scheduled Workflow
 on:
+  workflow_dispatch:
   schedule:
     # This cron syntax specifies the schedule for the workflow.
     # The format is: minute hour day_of_month month day_of_week
