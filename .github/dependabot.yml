@@ -3,6 +3,21 @@ updates:
   - package-ecosystem: "npm"  # Specifies the package ecosystem
     directory: "/"              # Location of the package.json file
     schedule:
-      interval: "weekly"        # Check for updates every week
+      interval: "monthly"        # Check for updates , olptions-- > daily,weekly,monthly
     commit-message:
-      prefix: "deps"            # Prefix for the commit message
+      prefix: "deps"            # Prefix for the commit message -->  Customizes the commit message prefix for the pull requests created by Dependabot.
+
+# this will auto raise PRs , ( currently i need to merge PRs manually , but that also can be automated)
+
+
+
+
+# version: Specifies the version of the configuration schema (currently, version 2 is used).
+# updates: A list of updates to check for.
+# package-ecosystem: Indicates the package manager being used. For Node.js projects, this is typically npm or yarn.
+# directory: The location of the package.json file. If it's in the root, use /.
+# schedule: Defines how often Dependabot checks for updates. Options include:
+# daily
+# weekly
+# monthly
+# commit-message: Customizes the commit message prefix for the pull requests created by Dependabot.
