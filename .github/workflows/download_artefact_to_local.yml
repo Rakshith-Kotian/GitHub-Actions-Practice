@@ -11,7 +11,7 @@ jobs:
         run: npm ci                
       - name: Run Build
         run: npm run build
-      - name: Upload artefatcs
+      - name: Upload report
         uses: actions/upload-artifact@v4
         with:
             name: TestReport
@@ -21,12 +21,18 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-        - name: Get Code
-          uses: actions/checkout@v4 
+        # - name: Get Code
+        #   uses: actions/checkout@v4 
 
-        - name: download job artifacts
-          uses: actions/download-artifact@v4
-          with:
-              name: TestReport
-              path: Reports            
+        # - name: download job artifacts
+        #   uses: actions/download-artifact@v4
+        #   with:
+        #       name: TestReport
+        #       path: Reports   --> here its still downloaded in github storage or runner, not to local,,
+              
+        - name: download  
+          run: |
+            echo "Downloading the Playwright report..."
+            gh auth login --with-token <<< "$GITHUB_TOKEN"
+            gh run download --name TestReport --dir ./Reports
 

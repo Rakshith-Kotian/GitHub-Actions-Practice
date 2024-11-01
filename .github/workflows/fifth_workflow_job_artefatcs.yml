@@ -39,3 +39,5 @@ jobs:
 # here im downloading artefact created by first build job ( auto unzips it) & just listing its contents & next steps .. ( deploy)
 # here needs: build is must ,because withour creating artefact we cant download it parallally
 
+
+# Note: here artefacts downloaded wont be stored in local , it will be available in github specific storage , accessible by that job runner..
