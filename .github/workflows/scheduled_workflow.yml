@@ -16,4 +16,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run scheduled job
-        uses: echo "This Job triggered today as scheduled.."
+        run: echo "This Job triggered today as scheduled.."
