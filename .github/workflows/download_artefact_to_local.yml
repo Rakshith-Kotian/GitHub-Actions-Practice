@@ -1,0 +1,42 @@
+# download generated reports to local after job is completed..
+name: Download Report to Local 
+on: workflow_dispatch                         
+jobs: 
+  test: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4 
+      - name: Install Dependencies
+        run: npm ci                
+      - name: Run Build
+        run: npm run build
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+            name: TestReport
+            path: dist
+            retention-days: 30
+
+  report:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+        # - name: Get Code
+        #   uses: actions/checkout@v4 
+
+        - name: download test artifacts
+          uses: actions/download-artifact@v4
+          with:
+              name: TestReport
+              path: Reports
+              
+        # - name: download  
+        #   run: |
+        #     echo "Downloading the Test report..."
+        #     gh auth login --with-token <<< "$GITHUB_TOKEN"
+        #     gh run download --name TestReport --dir ./Reports
+
+# do and try it in future..
+# note github manages artefacts in cloud and cant use download artefact action to download to local , download artefact actiuon  to used to get artefacts in different jobs inside runner itself..
+# other way to download artefact are through github api and github cli learn it..

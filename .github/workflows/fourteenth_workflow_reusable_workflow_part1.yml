@@ -1,0 +1,43 @@
+# combining two or more workflows and making it as one
+# i.e using other workflow in this workflow Eg: if build is seperate existing workflow, if im creating build + test workflow i can use existing test workflow here while making new build+test workflow
+
+name: Reusable Workflow Part 1
+on: 
+  workflow_call:
+    inputs:
+      artifact-name:
+        description: The name of the deployable artifact files
+        required: false
+        default: dist
+        type: string
+    # secrets:    --> if this workflow needs a secret defined here
+    #   some-secret:
+    #     required: true
+    outputs:
+      result:
+        description: The result of deployment operation
+        value: ${{ jobs.deploy.outputs.outcome }}
+jobs:
+  deploy:
+    outputs:
+      outcome: ${{ steps.set-result.outputs.step-result }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/download-artifact@v4
+        with: 
+          name: ${{ inputs.artifact-name }}  # artifact name is dynamic here , whatever we pass from other woprkflow ( i already defined what type opf file it is using inputs keyword at top)
+      - name: list received files
+        run: ls
+      - name: Deploy Code
+        run: echo "Deploying & Uploading..."
+      - name: Set results output to send to calling workflow
+        id: set-result
+        run: echo "step-result=success" >> $GITHUB_OUTPUT
+
+# if i use workflow_call event that means this workflow can be called in other workflow ( i can use [ workflow_dispatch, push, workflow_call ] like this too if required)( usually general workflows will be only callable by other workflows)
+# here for deploying we need a code/ report so after receiving/downloading that code from called workflow we are deploying the same to destination
+# inputs is a new github context.. used to receive inputs from other workflow  , also secrets 
+# inputs is a github action keyword , using that we define what type of file we are receiving here from called workflow ( under inputs we can user our own keys and but keys for its values are predefined  description, required,default,type etc .. ( hover over those keywords and check what it is))
+
+# similar to inputs , we have outputs where this workflow returns something to the calling workflow ( similar to return statement)

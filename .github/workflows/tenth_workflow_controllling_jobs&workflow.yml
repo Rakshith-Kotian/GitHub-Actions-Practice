@@ -1,0 +1,65 @@
+name: Controlling Jobs workflow
+on: workflow_dispatch                         
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4 
+      - name: Install Dependencies
+        run: npm ci                
+      - name: Run Lint
+        run: npm run lint
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4 
+      - name: Install Dependencies
+        run: npm ci                
+      - name: Run test
+        run: npm run test
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4 
+      - name: Install Dependencies
+        run: npm ci                
+      - name: Run build          
+        run: npm run builder   # passing wrong command to fail test  and run repoting job
+      - name: Upload build report    
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-files
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4 
+      - name: Install Dependencies
+        run: npm ci                
+      - name: Run Build
+        run: npm run build
+      - name: Deploy Code
+        run: echo "Deploying..."
+
+# below is a conditional job  ( make sure it runs in series at last or configure it properly)
+# this job only run if failure() is true. that is if any previous job (  here its build job )is failed then only reporting job will run
+  reporting:
+    needs: [lint, deploy]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say us if any one or more previous job is failed 
+        run: echo " Report Uploaded!..."
+
+# here lint runs signle , test,build,deploy runs in series -- reporting runs at last ( it needs both lint and other chained jobs which ran in series) ( if any previous job ( either lint alone or any chained job) fails then only reporting will run)
+# just alter the command of any jobs to make it fail 
+

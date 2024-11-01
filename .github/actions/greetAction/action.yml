@@ -1,0 +1,12 @@
+# https://docs.github.com/en/actions/sharing-automations/creating-actions/about-custom-actions --> action doc
+# if we are creating a repo of a public action make sure to add a readme file so the users will know how to use it
+
+name: "Greet Action"
+description: "A simple action to greet a user"
+inputs:
+  username:
+    description: "Name of the user to greet"
+    required: true
+runs:
+  using: "node12"  # Specify the Node.js version
+  main: "index.js"  # Entry point for the action

@@ -1,0 +1,30 @@
+name: Test Greet Action
+
+on: workflow_dispatch
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Specify the Node.js version
+
+# installing dependency mentioned in package.json file inside actions folder...
+      - name: Install Dependencies   
+        run: |
+          cd .github/actions/greetAction
+          npm install
+
+      - name: Run Greet Action
+        uses: ./.github/actions/greetAction  # Path to your action
+        with:
+          username: "World"
+
+
+# the actions can be in different folders along with its dependency files , but action  file should be named with action.yml only
+# every action will have its own logic and package file etc...

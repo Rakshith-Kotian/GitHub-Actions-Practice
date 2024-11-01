@@ -1,0 +1,43 @@
+name: Controlling steps workflow using if statement
+on: workflow_dispatch                         
+jobs:
+  buildfail:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4 
+      - name: Install Dependencies
+        run: npm ci                
+      - name: Run build
+        id: run-build           # add a id to required step to verify this step passed or failed in other conditional(ifetc) steps
+        run: npm run build
+      - name: Upload build report only if run build step fails   # fail the build test just by doing some code manipulation in build code & if passed report wont be zipped in github actions job tab.
+        if: failure() && steps.run-build.conclusion == 'failure'   
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-files
+          path: dist
+
+# if i provide just if condition without 'failure &&' keyword , then build report will be uploaded even if build fails ( it is default github actions behaviour)
+# now dist file will be created only if build fails
+
+  buildsuccess:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4 
+      - name: Install Dependencies
+        run: npm ci                
+      - name: Run build
+        id: run-build           
+        run: npm run build
+      - name: Upload build report only if run build step fails   
+        if: success() && steps.run-build.conclusion == 'success'   
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-files
+          path: dist
+
+# the second job here uploads report only if build succeeds 
+# failure() && steps.run-build.conclusion == 'failure'  --> this will make sure that if previous steps or jobs failed  then reporting wont run ( this is must because in some case installing dependency also might fail so that failure() function returns true and reporting wont occur as build step itself wont run if dependency failed, so no reporting required 1 && 0 == 0 ) ( if previous steps passed and just build failed then , failure retunrs 1 and conclusion also will be 1 so 1 && 1 ==1 so reporting occurs)
+# similarly success also works like this

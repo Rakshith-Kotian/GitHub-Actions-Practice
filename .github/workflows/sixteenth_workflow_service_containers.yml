@@ -1,0 +1,19 @@
+name: Service Container
+on: workflow_dispatch
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: node:16
+    services:
+      mongodb:
+        image: mongo
+        ports:
+          - 27017:27017
+        env:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: example
+    steps:
+      - name: Dummy step
+        run: echo "dummy"
+# services can be multiple for one job and each service runs on docker images --> eg mongo image: https://hub.docker.com/_/mongo  & it needs some env variables which is defined in this website

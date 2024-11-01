@@ -1,0 +1,20 @@
+name: Scheduled Workflow
+on:
+  workflow_dispatch:
+  schedule:
+    # This cron syntax specifies the schedule for the workflow.
+    # The format is: minute hour day_of_month month day_of_week
+    # Here are a few examples:
+    # - "0 0 * * *"    -> Every day at midnight (UTC)
+    # - "30 14 * * *"  -> Every day at 14:30 (2:30 PM) UTC
+    # - "0 9 * * 1"    -> Every Monday at 09:00 AM UTC
+    # - "0 0 1 * *"    -> At midnight on the first day of every month
+    # - "*/15 * * * *" -> Every 15 minutes
+    - cron: "0 0 1 * *" # At midnight on the first day of every month  ( hover over the cron sytax to check when it will trigger , time is UTC)
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run scheduled job
+        run: echo "This Job triggered today as scheduled.."

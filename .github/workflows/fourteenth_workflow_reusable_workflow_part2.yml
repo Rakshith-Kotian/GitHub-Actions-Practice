@@ -1,0 +1,68 @@
+# since for build i already have a workflow/job , by mentioning its path i can call that workflow here for deploying
+# open and check deploy step in github actions , it displays exact output as mentioned in reusable workflow part 1
+name: Reusable Workflow Part 2
+on: workflow_dispatch
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run Lint
+        run: npm run lint
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run test
+        run: npm run test
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run build
+        run: npm run build
+      - name: Upload build report
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-files
+          path: dist
+
+  deploy:
+    needs: build
+    uses: ./.github/workflows/fourteenth_workflow_reusable_workflow_part1.yml
+    # passing the expected file to the calling workflow
+    with:
+        artifact-name: dist-files
+    # if i have any sercret to pass to the calling workflow send like below
+   #secrets:
+   #    some-secret: $&{{ secrets.some-secret }}   --> remove & 
+
+  # get the deploy job output from called workflow and print
+  print-deploy-result:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print deploy output
+        run: echo "${{ needs.deploy.outputs.result }}"  #needs is also a github context
+
+  reporting:
+    needs: [lint, deploy]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say us if any one or more previous job is failed
+        run: echo " Report Uploaded!..."
+
+# once this workflow run is completed , open print-deploy-result job and check if it gives success as output ( as we specified in resuable workflow part 1)

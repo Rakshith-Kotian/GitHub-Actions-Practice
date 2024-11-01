@@ -1,0 +1,41 @@
+#This workflow is working fine ( include "RELEASE" word in commit msg to create a automatic release)
+name: Create Release on Keyword
+
+on:
+  push:
+    branches:
+      - main  # Change this to your main branch if different
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Set up Git
+        run: |
+          git fetch --tags
+
+      - name: Check for RELEASE keyword
+        id: check_keyword
+        run: |
+          if git log -1 --pretty=%B | grep -q "RELEASE"; then
+            echo "Keyword found."
+            echo "create_release=true" >> $GITHUB_ENV
+          else
+            echo "Keyword not found."
+            echo "create_release=false" >> $GITHUB_ENV
+          fi
+
+      - name: Create Release
+        if: env.create_release == 'true'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v1.0.0  # You can modify this to use a dynamic tag or set based on the commit
+          release_name: Release ${{ github.sha }}  # You can customize the release name
+          body: |
+            Changes in this release:
+            - ${{ github.event.head_commit.message }}  # Include commit message in release notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
