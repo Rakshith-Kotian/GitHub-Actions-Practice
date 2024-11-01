@@ -1,5 +1,6 @@
 # this action is used to cehck the syntax of python code , if any syntax error workflow will fail
 # find this action info in github marketplace --> https://github.com/marketplace/actions/python-syntax-checker
+# this workflow is working fine..
 
 name: Python Syntax Checker
 
