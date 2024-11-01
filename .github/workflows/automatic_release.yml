@@ -1,3 +1,4 @@
+#This workflow is working fine ( include "RELEASE" word in commit msg to create a automatic release)
 name: Create Release on Keyword
 
 on:
