@@ -2,7 +2,7 @@
 name: Download Report to Local 
 on: workflow_dispatch                         
 jobs: 
-  build: 
+  test: 
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
@@ -17,10 +17,13 @@ jobs:
             name: TestReport
             path: dist
 
-  deploy:
-    needs: build
+  report:
+    needs: test
     runs-on: ubuntu-latest
     steps:
+        - name: Get Code
+          uses: actions/checkout@v4 
+
         - name: download job artifacts
           uses: actions/download-artifact@v4
           with:
