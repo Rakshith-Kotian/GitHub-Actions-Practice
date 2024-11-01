@@ -16,6 +16,7 @@ jobs:
         with:
             name: TestReport
             path: dist
+            retention-days: 30
 
   report:
     needs: test
@@ -24,16 +25,16 @@ jobs:
         # - name: Get Code
         #   uses: actions/checkout@v4 
 
-        # - name: download job artifacts
-        #   uses: actions/download-artifact@v4
-        #   with:
-        #       name: TestReport
-        #       path: Reports   --> here its still downloaded in github storage or runner, not to local,,
+        - name: download test artifacts
+          uses: actions/download-artifact@v4
+          with:
+              name: TestReport
+              path: Reports/new
               
-        - name: download  
-          run: |
-            echo "Downloading the Test report..."
-            gh auth login --with-token <<< "$GITHUB_TOKEN"
-            gh run download --name TestReport --dir ./Reports
+        # - name: download  
+        #   run: |
+        #     echo "Downloading the Test report..."
+        #     gh auth login --with-token <<< "$GITHUB_TOKEN"
+        #     gh run download --name TestReport --dir ./Reports
 
 # do and try it in future..
