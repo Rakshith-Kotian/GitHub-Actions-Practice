@@ -1,0 +1,8 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"  # Specifies the package ecosystem
+    directory: "/"              # Location of the package.json file
+    schedule:
+      interval: "weekly"        # Check for updates every week
+    commit-message:
+      prefix: "deps"            # Prefix for the commit message
