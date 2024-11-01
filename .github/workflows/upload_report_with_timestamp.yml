@@ -34,7 +34,7 @@ jobs:
 
       - name: Set Report Name
         id: report_name
-        run: echo "REPORT_NAME=TestReport-$(date +'%Y-%m-%d_%H-%M-%S')" >> $GITHUB_ENV
+        run: echo "REPORT_NAME=TestReport_$(date +'%Y%m%d_%H%M%S')" >> $GITHUB_ENV
 
       - name: Upload Report
         uses: actions/upload-artifact@v4
